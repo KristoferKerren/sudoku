@@ -66,4 +66,16 @@
     border-bottom-width: 3px;
     border-bottom-color: black;
   }
+
+  &.has-error {
+    background: lightcoral;
+  }
+
+  &.is-active {
+    background: lightgray;
+  }
+}
+
+.finished-message {
+  color: green;
 }
