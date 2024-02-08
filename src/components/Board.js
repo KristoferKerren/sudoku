@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { games, nbrOfGames } from '../games';
 import Square from './Square';
 import SetNumber from './SetNumber';
@@ -23,7 +23,6 @@ export default function Board() {
     const newSquares = [...squares.map((row) => [...row])];
     newSquares[activeSquare.y][activeSquare.x].val = number;
     validateSquares(newSquares);
-    console.log({ squares });
     setSquares(newSquares);
   }
 
@@ -65,6 +64,25 @@ export default function Board() {
       setIsFinished(true);
     }
   }
+
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      const numberTyped = parseInt(event.key);
+      if (
+        activeSquare &&
+        !Number.isNaN(numberTyped) &&
+        numberTyped >= 1 &&
+        numberTyped <= 9
+      ) {
+        handleNumberSelect(numberTyped);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeSquare]);
 
   return (
     <>
