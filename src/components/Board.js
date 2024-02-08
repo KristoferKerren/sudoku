@@ -7,9 +7,23 @@ import Finished from './Finished';
 const initialSquares = games[Math.floor(Math.random() * nbrOfGames)];
 
 export default function Board() {
+  const [open, setOpen] = useState(false);
   const [squares, setSquares] = useState(initialSquares);
   const [activeSquare, setActiveSquare] = useState(null);
   const [isFinished, setIsFinished] = useState(false);
+
+  function clearAll() {
+    const newSquares = [...squares.map((row) => [...row])];
+    newSquares.forEach((row) =>
+      row.forEach((s) => {
+        if (!s.isInitial) {
+          s.val = null;
+        }
+      })
+    );
+    validateSquares(newSquares);
+    setSquares(newSquares);
+  }
 
   function handleClick(square) {
     if (square.isInitial || isFinished) {
@@ -106,6 +120,9 @@ export default function Board() {
       </div>
       <div>
         {activeSquare && <SetNumber onSelect={handleNumberSelect}></SetNumber>}
+      </div>
+      <div>
+        <button onClick={clearAll}>Start over</button>
       </div>
       <div>
         {isFinished && <Finished onSelect={handleNumberSelect}></Finished>}
