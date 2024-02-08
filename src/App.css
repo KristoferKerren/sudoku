@@ -1,0 +1,69 @@
+.App {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+.board-container {
+  display: inline-grid;
+  grid-template-columns: repeat(9, 1fr);
+}
+
+.board-cell {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 34px;
+  height: 34px;
+  width: 34px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:nth-child(n + 1):not(:nth-child(n + 10)) {
+    border-top-width: 3px;
+    border-top-color: black;
+  }
+
+  &:nth-child(9n + 1) {
+    border-left-width: 3px;
+    border-left-color: black;
+  }
+
+  &:nth-child(3n) {
+    border-right-width: 3px;
+    border-right-color: black;
+  }
+
+  &:nth-child(n + 19):not(:nth-child(n + 28)),
+  &:nth-child(n + 46):not(:nth-child(n + 55)),
+  &:nth-child(n + 73):not(:nth-child(n + 82)) {
+    border-bottom-width: 3px;
+    border-bottom-color: black;
+  }
+}
